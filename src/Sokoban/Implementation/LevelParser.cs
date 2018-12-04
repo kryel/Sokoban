@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 
-namespace Sokoban
+namespace Sokoban.Implementation
 {
     public class LevelParser
     {
@@ -15,10 +16,14 @@ namespace Sokoban
         public const char Box = 'O';
         public const char BoxOnTarget = 'Ø';
 
-        internal static Level FromFile(string levelName)
+        internal static Level FromFile(string path)
         {
-            var lines = File.ReadAllLines($"Resources/Levels/{levelName}");
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"The requested level (at path: {path}) does not exist.");
+            }
 
+            var lines = File.ReadAllLines(path);
             var playerPosition = default(Point?);
             var walls = new HashSet<Point>();
             var boxPositions = new HashSet<Point>();
@@ -27,17 +32,13 @@ namespace Sokoban
             var height = lines.Length;
             var width = lines.Max(s => s.Length);
 
-            var y = 0;
-            foreach (var line in lines)
+            for (var y = 0; y < lines.Length; y++)
             {
-                var x = 0;
-                foreach (var character in line)
+                var line = lines[y];
+                for (var x = 0; x < line.Length; x++)
                 {
-                    ParseCharacter(character, new Point(x, y));
-                    x++;
+                    ParseCharacter(line[x], new Point(x, y));
                 }
-
-                y++;
             }
 
             if (playerPosition == default(Point?))
@@ -50,7 +51,7 @@ namespace Sokoban
                 throw new InvalidOperationException("Level does not contain the same number of boxes and targets");
             }
 
-            return new Level(width, height, walls, boxPositions, targetPositions, playerPosition.Value);
+            return new Level(width, height, walls.ToImmutableHashSet(), targetPositions.ToImmutableHashSet(), boxPositions.ToImmutableHashSet(), playerPosition.Value);
 
             void ParseCharacter(char c, Point point)
             {

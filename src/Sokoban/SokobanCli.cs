@@ -1,47 +1,58 @@
 ﻿using System;
 using System.Linq;
+using Sokoban.Implementation;
 
 namespace Sokoban
 {
-    public class ConsoleGame
+    public class SokobanCli
     {
-        public void Start(string levelName)
+        public void Start()
         {
-            var level = LevelParser.FromFile(levelName);
-            Print(level);
+            const string path = "Resources/Levels/Level0.txt";
+            var level = LevelParser.FromFile(path);
+            var game = new Game(level);
+            Print(level, game.GetCurrentState());
 
             while (true)
             {
                 switch (Console.ReadKey().Key)
                 {
                     case ConsoleKey.Escape:
+                        Console.WriteLine();
                         return;
 
                     case ConsoleKey.R:
-                        level = LevelParser.FromFile(levelName);
+                        game.Reset();
                         break;
 
                     case ConsoleKey.UpArrow:
                     case ConsoleKey.W:
-                        level.MovePlayer(Direction.North);
+                        game.MovePlayer(Direction.North);
                         break;
                     case ConsoleKey.RightArrow:
                     case ConsoleKey.D:
-                        level.MovePlayer(Direction.East);
+                        game.MovePlayer(Direction.East);
                         break;
                     case ConsoleKey.DownArrow:
                     case ConsoleKey.S:
-                        level.MovePlayer(Direction.South);
+                        game.MovePlayer(Direction.South);
                         break;
                     case ConsoleKey.LeftArrow:
                     case ConsoleKey.A:
-                        level.MovePlayer(Direction.West);
+                        game.MovePlayer(Direction.West);
+                        break;
+
+                    case ConsoleKey.PageDown:
+                        game.Undo();
+                        break;
+                    case ConsoleKey.PageUp:
+                        game.Redo();
                         break;
                 }
 
-                Print(level);
+                Print(level, game.GetCurrentState());
 
-                if (level.HasWon())
+                if (game.HasWon())
                 {
                     Console.WriteLine("\nCongratulations you've solved the puzzle!\n");
                     return;
@@ -49,7 +60,7 @@ namespace Sokoban
             }
         }
 
-        private static void Print(Level level)
+        private static void Print(Level level, GameState gameState)
         {
             Console.Clear();
             for (var y = 0; y < level.Height; y++)
@@ -70,14 +81,14 @@ namespace Sokoban
                 }
 
                 var isTargetTile = level.TargetPositions.Contains(point);
-                if (level.PlayerPosition == point)
+                if (gameState.PlayerPosition == point)
                 {
                     return isTargetTile
                         ? LevelParser.PlayerOnTarget
                         : LevelParser.Player;
                 }
 
-                if (level.BoxPositions.Any(b => b == point))
+                if (gameState.BoxPositions.Any(b => b == point))
                 {
                     return isTargetTile
                         ? LevelParser.BoxOnTarget

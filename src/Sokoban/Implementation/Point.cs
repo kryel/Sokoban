@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sokoban
+namespace Sokoban.Implementation
 {
     internal struct Point : IEquatable<Point>
     {

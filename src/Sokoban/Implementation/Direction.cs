@@ -1,4 +1,4 @@
-﻿namespace Sokoban
+﻿namespace Sokoban.Implementation
 {
     internal struct Direction
     {

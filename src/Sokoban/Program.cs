@@ -7,8 +7,8 @@ namespace Sokoban
     {
         private static int Main(string[] args)
         {
-            var game = new ConsoleGame();
-            game.Start("Level0.txt");
+            var sokobanCli = new SokobanCli();
+            sokobanCli.Start();
 
             if (Debugger.IsAttached)
             {
