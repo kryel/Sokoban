@@ -2,23 +2,23 @@
 
 namespace Sokoban.Implementation
 {
-    internal struct Point : IEquatable<Point>
+    internal struct Tile : IEquatable<Tile>
     {
         public readonly int X;
         public readonly int Y;
 
-        public Point(int x, int y)
+        public Tile(int x, int y)
         {
             X = x;
             Y = y;
         }
 
-        public static Point Clone(Point point)
+        public static Tile Clone(Tile tile)
         {
-            return new Point(point.X, point.Y);
+            return new Tile(tile.X, tile.Y);
         }
 
-        public bool Equals(Point other)
+        public bool Equals(Tile other)
         {
             return X == other.X && Y == other.Y;
         }
@@ -30,7 +30,7 @@ namespace Sokoban.Implementation
                 return false;
             }
 
-            return obj is Point point && Equals(point);
+            return obj is Tile point && Equals(point);
         }
 
         public override int GetHashCode()
@@ -41,17 +41,17 @@ namespace Sokoban.Implementation
             }
         }
 
-        public static Point operator +(Point point, Direction direction)
+        public static Tile operator +(Tile tile, Direction direction)
         {
-            return new Point(point.X + direction.X, point.Y + direction.Y);
+            return new Tile(tile.X + direction.X, tile.Y + direction.Y);
         }
 
-        public static bool operator ==(Point a, Point b)
+        public static bool operator ==(Tile a, Tile b)
         {
             return a.Equals(b);
         }
 
-        public static bool operator !=(Point a, Point b)
+        public static bool operator !=(Tile a, Tile b)
         {
             return !(a == b);
         }

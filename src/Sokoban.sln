@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sokoban", "Sokoban\Sokoban.csproj", "{E91F8245-F1BA-4550-A2F7-566711FB4E17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sokoban", "Sokoban\Sokoban.csproj", "{CC8356AE-BE3E-4550-B3CD-AF054E090B8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E91F8245-F1BA-4550-A2F7-566711FB4E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E91F8245-F1BA-4550-A2F7-566711FB4E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E91F8245-F1BA-4550-A2F7-566711FB4E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E91F8245-F1BA-4550-A2F7-566711FB4E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8356AE-BE3E-4550-B3CD-AF054E090B8A}.Debug|x86.ActiveCfg = Debug|x86
+		{CC8356AE-BE3E-4550-B3CD-AF054E090B8A}.Debug|x86.Build.0 = Debug|x86
+		{CC8356AE-BE3E-4550-B3CD-AF054E090B8A}.Release|x86.ActiveCfg = Release|x86
+		{CC8356AE-BE3E-4550-B3CD-AF054E090B8A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FF0D1C2C-EEA1-4AFC-BA4A-44EFD3C9DA19}
+		SolutionGuid = {B59803AD-7361-488F-99BB-90494487BFCD}
 	EndGlobalSection
 EndGlobal

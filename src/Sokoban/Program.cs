@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Sokoban
 {
-    internal static class Program
+#if WINDOWS || LINUX
+    /// <summary>
+    /// The main class.
+    /// </summary>
+    public static class Program
     {
-        private static int Main(string[] args)
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        private static void Main()
         {
-            var sokobanCli = new SokobanCli();
-            sokobanCli.Start();
-
-            if (Debugger.IsAttached)
+            using (var game = new SokobanGame())
             {
-                Console.WriteLine("Press any key to exit . . .");
-                Console.ReadKey();
+                game.Run();
             }
-
-            return 0;
         }
     }
+#endif
 }

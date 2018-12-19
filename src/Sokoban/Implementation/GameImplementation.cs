@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace Sokoban.Implementation
 {
-    internal class Game
+    internal class GameImplementation
     {
         private readonly Level _level;
         private readonly Stack<GameState> _states;
         private readonly Stack<GameState> _undoStack;
 
-        public Game(Level level)
+        public GameImplementation(Level level)
         {
             _level = level;
             _states = new Stack<GameState>(new[] { new GameState(level.PlayerStartingPosition, level.BoxStartingPositions) });

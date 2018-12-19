@@ -4,10 +4,10 @@ namespace Sokoban.Implementation
 {
     internal class GameState
     {
-        public Point PlayerPosition { get; }
-        public IImmutableSet<Point> BoxPositions { get; }
+        public Tile PlayerPosition { get; }
+        public IImmutableSet<Tile> BoxPositions { get; }
 
-        public GameState(Point playerPosition, IImmutableSet<Point> boxPositions)
+        public GameState(Tile playerPosition, IImmutableSet<Tile> boxPositions)
         {
             PlayerPosition = playerPosition;
             BoxPositions = boxPositions;

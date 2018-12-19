@@ -24,10 +24,10 @@ namespace Sokoban.Implementation
             }
 
             var lines = File.ReadAllLines(path);
-            var playerPosition = default(Point?);
-            var walls = new HashSet<Point>();
-            var boxPositions = new HashSet<Point>();
-            var targetPositions = new HashSet<Point>();
+            var playerPosition = default(Tile?);
+            var walls = new HashSet<Tile>();
+            var boxPositions = new HashSet<Tile>();
+            var targetPositions = new HashSet<Tile>();
 
             var height = lines.Length;
             var width = lines.Max(s => s.Length);
@@ -37,11 +37,11 @@ namespace Sokoban.Implementation
                 var line = lines[y];
                 for (var x = 0; x < line.Length; x++)
                 {
-                    ParseCharacter(line[x], new Point(x, y));
+                    ParseCharacter(line[x], new Tile(x, y));
                 }
             }
 
-            if (playerPosition == default(Point?))
+            if (playerPosition == default(Tile?))
             {
                 throw new InvalidOperationException("Level does not contain a player");
             }
@@ -53,7 +53,7 @@ namespace Sokoban.Implementation
 
             return new Level(width, height, walls.ToImmutableHashSet(), targetPositions.ToImmutableHashSet(), boxPositions.ToImmutableHashSet(), playerPosition.Value);
 
-            void ParseCharacter(char c, Point point)
+            void ParseCharacter(char c, Tile point)
             {
                 switch (c)
                 {
@@ -69,7 +69,7 @@ namespace Sokoban.Implementation
                         playerPosition = point;
                         break;
                     case PlayerOnTarget:
-                        playerPosition = Point.Clone(point);
+                        playerPosition = Tile.Clone(point);
                         targetPositions.Add(point);
                         break;
                     case Box:
